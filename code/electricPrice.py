@@ -57,6 +57,13 @@ def getUscbData():
     return dfp
 
 
+def saveDataToCsv(df):
+    """PURPOSE:
+    A routine to save the data.
+    """
+    df.to_csv('../data/2014PerCapitaUsage.csv', columns=['State', '201411YTDR', '2014', 'PerCap'])
+
+
 def electricPrice():
     """
     PURPOSE: A routine to combine data sets from the US Energy
@@ -77,5 +84,13 @@ def electricPrice():
 
     #now calculate the per capita usage:
     df['PerCap'] = df['201411YTDR']*1e6 / df['2014']
+    return df
 
-    df.to_csv('../data/2014PerCapitaUsage.csv', columns=['State', '201411YTDR', '2014', 'PerCap'])
+
+def electricPriceDrive():
+    """
+    PURPOSE:
+    A routine to do all of the above
+    """
+    df = electricPrice()
+    saveDataToCsv(df)
