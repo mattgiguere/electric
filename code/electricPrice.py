@@ -57,11 +57,44 @@ def getUscbData():
     return dfp
 
 
+def getIncomeData():
+    """
+    PURPOSE: To restore the US Census Income data
+    """
+    dfi = pd.read_excel('../data/statemhi2_13.xls', skiprows=7, header=0, skipfooter=4)
+    names = ['State', 'MedianIncome10-11', 'Uncertainty10-11', 'ConfInt',
+             'MedianIncome12-13', 'Uncertainty12-13', 'ConfInt',
+             'ChangeDollars', 'bla1', 'ChangePercent', 'bla2']
+    dfi.columns = names
+
+    return dfi
+
+
+def getEiaRates():
+    """
+    PURPOSE: To get EIA rate data
+    """
+    dfr = pd.read_excel('../data/january2015/Table_5_06_B.xlsx',
+                        skiprows=3, header=0, skipfooter=2)
+    #rename columns. (R)esidential, (C)ommercial, (I)ndustrial
+    #(T)ransportation, and (A)ll:
+    dfr.columns = ['State',
+                   '1411RateYTDR', '1311RateYTDR',
+                   '1411RateYTDC', '1311RateYTDC',
+                   '1411RateYTDI', '1311RateYTDI',
+                   '1411RateYTDT', '1311RateYTDT',
+                   '1411RateYTDA', '1311RateYTDA']
+
+    return dfr
+
+
 def saveDataToCsv(df):
     """PURPOSE:
     A routine to save the data.
     """
-    df.to_csv('../data/2014PerCapitaUsage.csv', columns=['State', '201411YTDR', '2014', 'PerCap'])
+    df.to_csv('../data/2014EnergyDataFull.csv',
+              columns=['State', '201411YTDR', '2014', 'PerCap',
+                       '1411RateYTDR', 'MedianIncome12-13', 'FracSpent'])
 
 
 def electricPrice():
@@ -73,17 +106,35 @@ def electricPrice():
     by state.
     """
 
+    #US Average Persons Per Household (2009-2013):
+    pph = 2.63
+
     #retrieve EIA data:
     dfe = getEiaData()
+
+    #retrieve EIA Rate Data:
+    dfr = getEiaRates()
 
     #retrieve Census data:
     dfp = getUscbData()
 
-    #merge the two:
+    #retrieve income data:
+    dfi = getIncomeData()
+
+    #merge the EIA and Pop Data:
     df = pd.merge(dfe, dfp, on='State')
+
+    #Now merge with Income data:
+    df = pd.merge(df, dfi, on='State')
+
+    #Now merge with rate data:
+    df = pd.merge(df, dfr, on='State')
 
     #now calculate the per capita usage:
     df['PerCap'] = df['201411YTDR']*1e6 / df['2014']
+
+    #Now calculate the fraction of income spent on electric:
+    df['FracSpent'] = df['PerCap'] * pph * df['1411RateYTDR'] / 100. / df['MedianIncome12-13']
     return df
 
 
