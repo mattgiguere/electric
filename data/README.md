@@ -25,7 +25,17 @@ Below is a description of the data sources contained within this directory.
   - *PerCap*: The calculated per capita energy usage by state in annual kWh used.
 
 
+- **2014PerCapitaUsage.tde**: The Tableau Data Extract of `2014PerCapitaUsage.csv`. This file is needed to save Tableau workbooks to Tableau public.
+
+
+- **ElectricRatesByState201411YTD.tde**: The Tableau Data Extract containing data on electric rates by state in the US. This `tde` was used to create the `../tableau/electricRatesByState201411.twb` Tableau workbook.
+
+
+- **NST-EST2014-01.csv**: United States Census Bureau population estimates for the past 5 years: State Totals: Vintage 2014. This [file][UscbPops] was downloaded on 2015.03.15 from the [USCB State Total: Vintage 2014 Page][UscbPopPage].
+
 - **statemhi2_13.xls**: The Annual Social and Economic Supplement Current
 Income of Households by State
 
 [UsEiaEpm]: http://www.eia.gov/electricity/monthly/index.cfm
+[UscbPops]: https://www.census.gov/popest/data/state/totals/2014/tables/NST-EST2014-01.csv
+[UscbPopPage]: https://www.census.gov/popest/data/state/totals/2014/index.html
