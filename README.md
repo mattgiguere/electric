@@ -4,7 +4,7 @@
 
 [![MIT-Lic](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/mattgiguere/electric/blob/master/LICENSE)
 
-This repository contains all the code and data that went into an analysis of the electric usage in the United States by state.
+This repository contains all the code and data that went into my analysis of the electric usage in the United States by state.
 
 ###Directory Descriptions
 
@@ -42,3 +42,6 @@ This repository contains all the code and data that went into an analysis of the
 
  - ####tableau
   - see tableau/README.md for file descriptions.
+
+###License
+All code in this repository is licensed under an MIT license. See LICENSE for more information.
