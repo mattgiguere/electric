@@ -35,3 +35,6 @@ This repository contains all the code and data that went into an analysis of the
     import electricPrice as ep
     ep.electricPriceDrive()
     ```
+
+ - ####data
+  - see data/README.md for file descriptions.
