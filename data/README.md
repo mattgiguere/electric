@@ -33,9 +33,10 @@ Below is a description of the data sources contained within this directory.
 
 - **NST-EST2014-01.csv**: United States Census Bureau population estimates for the past 5 years: State Totals: Vintage 2014. This [file][UscbPops] was downloaded on 2015.03.15 from the [USCB State Total: Vintage 2014 Page][UscbPopPage].
 
-- **statemhi2_13.xls**: The Annual Social and Economic Supplement Current
-Income of Households by State
+- **statemhi2_13.xls**: The Annual Social and Economic Supplement Current Income of Households by State. This [file][UscbInc] was downloaded on 2015.03.15 from the [USCB State Median Income Page][UscbIncPage].
 
 [UsEiaEpm]: http://www.eia.gov/electricity/monthly/index.cfm
 [UscbPops]: https://www.census.gov/popest/data/state/totals/2014/tables/NST-EST2014-01.csv
 [UscbPopPage]: https://www.census.gov/popest/data/state/totals/2014/index.html
+[UscbInc]: http://www.census.gov/hhes/www/income/data/incpovhlth/2013/statemhi2_13.xls
+[UscbIncPage]: http://www.census.gov/hhes/www/income/data/statemedian/
