@@ -17,7 +17,7 @@ This repository contains all the code and data that went into an analysis of the
 
  - ####code
   - **electricPrice.py**: The main routine for combining and cleaning the data sets used in this analysis. There are no input arguments, and it contains just a few simple commands using the pandas and re libraries. Some examples are shown below.
-    - To extract the data from the US Energy Information Agency used in the creation of the `electricRatesByState201411.twb` Tableau workbook:
+    - To extract the data from the US Energy Information Administration used in the creation of the `electricRatesByState201411.twb` Tableau workbook:
    ```python
    import electricPrice as ep
    dfr = ep.getEiaRates()
