@@ -14,3 +14,24 @@ This repository contains all the code and data that went into an analysis of the
 
 ###File Descriptions
 ---------------------------------------
+
+ - ####code
+  - **electricPrice.py**: The main routine for combining and cleaning the data sets used in this analysis. There are no input arguments, and it contains just a few simple commands using the pandas and re libraries. Some examples are shown below.
+    - To extract the data from the US Energy Information Agency used in the creation of the `electricRatesByState201411.twb` Tableau workbook:
+   ```python
+   import electricPrice as ep
+   dfr = ep.getEiaRates()
+   ```
+   where `dfe` is a pandas DataFrame containing the entirety of the Table 5.06 B excel spreadsheet from the US EIA monthly reports.
+
+    - To read in the population data from the US Census Bureau that is in csv format as a pandas DataFrame:
+    ```python
+    import electricPrice as ep
+    dfp = ep.getUscbData()
+    ```
+
+    - To calculate the average fraction of income spent on electric and save the results as a csv file to be imported into Tableau:
+    ```python
+    import electricPrice as ep
+    ep.electricPriceDrive()
+    ```
