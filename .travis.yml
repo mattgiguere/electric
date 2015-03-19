@@ -1,4 +1,7 @@
 language: python
 python:
   - "2.7.9"
+env:
+    matrix:
+        - PANDAS_VERSION=0.15.2
 script: nosetests
