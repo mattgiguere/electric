@@ -5,8 +5,6 @@ Created on 2015-03-15T20:28:12
 """
 
 from __future__ import division, print_function
-import sys
-import argparse
 import pandas as pd
 import re
 import electric

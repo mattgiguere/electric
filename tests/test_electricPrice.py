@@ -68,3 +68,51 @@ def test_getIncomeData_for_number_of_rows():
 def test_getEiaRates_for_number_of_rows():
     dfr = ep.getEiaRates()
     assert len(dfr) >= 50
+
+
+##############################################
+#ENSURE EACH DATAFRAME HAS A "STATE" COLUMN
+#SINCE DATAFRAMES WILL BE MERGED ON THIS
+#COLUMN
+##############################################
+def test_EiaData_for_state_column():
+    df = ep.getEiaData()
+    assert 'State' in df.columns
+
+
+def test_UscbData_for_state_column():
+    df = ep.getUscbData()
+    assert 'State' in df.columns
+
+
+def test_IncomeData_for_state_column():
+    df = ep.getIncomeData()
+    assert 'State' in df.columns
+
+
+def test_EiaRates_for_state_column():
+    df = ep.getEiaRates()
+    assert 'State' in df.columns
+
+
+#############################################
+#NOW TEST THE FUNCTION THAT DOES ALL THE WORK
+#############################################
+def test_electricPrice_frac_spent_col_exists():
+    df = ep.electricPrice()
+    assert 'FracSpent' in df.columns
+
+
+def test_electricPrice_PerCap_col_exists():
+    df = ep.electricPrice()
+    assert 'PerCap' in df.columns
+
+
+def test_electricPrice_FracSpent_lt_1():
+    df = ep.electricPrice()
+    assert df['FracSpent'].max() < 1
+
+
+def test_electricPrice_for_number_of_rows():
+    df = ep.electricPrice()
+    assert len(df) >= 50
