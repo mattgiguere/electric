@@ -6,8 +6,8 @@ install:
     - sudo pip install conda
     #install dependencies
     - sudo conda init
-    #- sudo conda update conda --yes
-    - conda update pandas --yes
+    - conda config --set always_yes yes --set changeps1 no
+    - conda update -q conda
     - deps='pip numpy pandas requests nose'
     - conda create -p $HOME/py --yes $deps "python=$TRAVIS_PYTHON_VERSION"
     - export PATH=$HOME/py/bin:$PATH
