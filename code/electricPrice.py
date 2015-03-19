@@ -9,6 +9,8 @@ import sys
 import argparse
 import pandas as pd
 import re
+import os
+import subprocess
 
 __author__ = "Matt Giguere (github: @mattgiguere)"
 __maintainer__ = "Matt Giguere"
@@ -21,8 +23,11 @@ def getEiaData():
     """
     PURPOSE: Restore the EIA data to DataFrame
     """
+    os.chdir("../")
+    print(subprocess.check_output('pwd'))
+    
     #read in the US EIA Energy Use data:
-    dfe = pd.read_excel('../data/january2015/Table_5_04_B.xlsx', skiprows=3, header=0)
+    dfe = pd.read_excel('data/january2015/Table_5_04_B.xlsx', skiprows=3, header=0)
 
     #rename columns. (R)esidential, (C)ommercial, (I)ndustrial
     #(T)ransportation, and (A)ll:
