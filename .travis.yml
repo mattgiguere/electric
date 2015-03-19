@@ -1,7 +1,13 @@
 language: python
 python:
   - "2.7.9"
-env:
-    matrix:
-        - PANDAS_VERSION=0.15.2
+install:
+    #Install conda
+    - sudo pip install conda
+    #install dependencies
+    - sudo conda init
+    - sudo conda update conda --yes
+    - deps='pip numpy pandas requests nose'
+    - conda create -p $HOME/py --yes $deps "python=$TRAVIS_PYTHON_VERSION"
+    - export PATH=$HOME/py/bin:$PATH
 script: nosetests
