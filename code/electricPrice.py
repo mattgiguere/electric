@@ -9,8 +9,7 @@ import sys
 import argparse
 import pandas as pd
 import re
-import os
-import subprocess
+import electric
 
 __author__ = "Matt Giguere (github: @mattgiguere)"
 __maintainer__ = "Matt Giguere"
@@ -18,16 +17,18 @@ __email__ = "matthew.giguere@yale.edu"
 __status__ = " Development NOT(Prototype or Production)"
 __version__ = '0.0.1'
 
+#get the path to the repository so that data paths can be determined
+#from the root level. This is necessary for running tests:
+elec_dir = '/'.join(str(electric.__file__).split('/')[:-1])+'/'
+
 
 def getEiaData():
     """
     PURPOSE: Restore the EIA data to DataFrame
     """
-    os.chdir("../")
-    print(subprocess.check_output('pwd'))
-    
+
     #read in the US EIA Energy Use data:
-    dfe = pd.read_excel('data/january2015/Table_5_04_B.xlsx', skiprows=3, header=0)
+    dfe = pd.read_excel(elec_dir+'data/january2015/Table_5_04_B.xlsx', skiprows=3, header=0)
 
     #rename columns. (R)esidential, (C)ommercial, (I)ndustrial
     #(T)ransportation, and (A)ll:
@@ -48,7 +49,7 @@ def getUscbData():
     #which have details about the data, and the last 5 rows, which
     #have more details about the data. The python engine needs to be
     #specified when using `skipfooter`. See docs for details.
-    dfp = pd.read_csv('../data/NST-EST2014-01.csv', skiprows=3, header=0,
+    dfp = pd.read_csv(elec_dir+'data/NST-EST2014-01.csv', skiprows=3, header=0,
                       skipfooter=5, engine='python', thousands=',')
 
     #now change the column name of the first column to state:
@@ -66,7 +67,7 @@ def getIncomeData():
     """
     PURPOSE: To restore the US Census Income data
     """
-    dfi = pd.read_excel('../data/statemhi2_13.xls', skiprows=7, header=0, skipfooter=4)
+    dfi = pd.read_excel(elec_dir+'data/statemhi2_13.xls', skiprows=7, header=0, skipfooter=4)
     names = ['State', 'MedianIncome10-11', 'Uncertainty10-11', 'ConfInt',
              'MedianIncome12-13', 'Uncertainty12-13', 'ConfInt',
              'ChangeDollars', 'bla1', 'ChangePercent', 'bla2']
@@ -79,7 +80,7 @@ def getEiaRates():
     """
     PURPOSE: To get EIA rate data
     """
-    dfr = pd.read_excel('../data/january2015/Table_5_06_B.xlsx',
+    dfr = pd.read_excel(elec_dir+'data/january2015/Table_5_06_B.xlsx',
                         skiprows=3, header=0, skipfooter=2)
     #rename columns. (R)esidential, (C)ommercial, (I)ndustrial
     #(T)ransportation, and (A)ll:
@@ -97,7 +98,7 @@ def saveDataToCsv(df):
     """PURPOSE:
     A routine to save the data.
     """
-    df.to_csv('../data/2014EnergyDataFull.csv',
+    df.to_csv(elec_dir+'data/2014EnergyDataFull.csv',
               columns=['State', '201411YTDR', '2014', 'PerCap',
                        '1411RateYTDR', 'MedianIncome12-13', 'FracSpent'])
 
