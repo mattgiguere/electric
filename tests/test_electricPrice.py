@@ -43,3 +43,28 @@ def test_getEiaRates_for_number_of_columns():
     dfr = ep.getEiaRates()
     dfr_coln = len(dfr.columns.values)
     assert dfr_coln == 11
+
+
+##############################################
+#TEST FOR MINIMUM NUMBER OF ROWS. SINCE WE ARE
+#DEALING WITH STATE DATA THERE SHOULD BE AT
+#LEAST 50 ROWS
+##############################################
+def test_getEiaData_for_number_of_rows():
+    dfe = ep.getEiaData()
+    assert len(dfe) >= 50
+
+
+def test_getUscbData_for_number_of_rows():
+    dfp = ep.getUscbData()
+    assert len(dfp) >= 50
+
+
+def test_getIncomeData_for_number_of_rows():
+    dfi = ep.getIncomeData()
+    assert len(dfi) >= 50
+
+
+def test_getEiaRates_for_number_of_rows():
+    dfr = ep.getEiaRates()
+    assert len(dfr) >= 50
